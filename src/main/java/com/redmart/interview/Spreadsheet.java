@@ -1,9 +1,12 @@
 package main.java.com.redmart.interview;
 
-public class Spreadsheet {
+import java.util.logging.Handler;
+import java.util.logging.Logger;
 
-	public static void main(String[] args) {
-		
+public class Spreadsheet 
+{	
+	public static void main(String[] args) 
+	{		
 		IInputSource inSource = new ConsoleInputSource();
 		IOutputSource outSource = new ConsoleOutputSource();
 		
@@ -11,6 +14,5 @@ public class Spreadsheet {
 		Worksheet sheet = book.createWorksheet(inSource);
 		
 		sheet.dumpTo(outSource);
-	}
-
+	}	
 }

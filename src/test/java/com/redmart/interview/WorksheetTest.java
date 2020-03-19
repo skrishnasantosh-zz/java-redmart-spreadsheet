@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.redmart.interview.InvalidCellReferenceException;
 import main.java.com.redmart.interview.Workbook;
 import main.java.com.redmart.interview.Worksheet;
 
 class WorksheetTest {
 
 	@Test
-	void testWorksheet_invalidArgumentsToConstructor_throwsIllegalArgumentException() {	
+	void testWorksheet_invalidArgumentsToConstructor_throwsIllegalArgumentException() 
+	{	
 		
 		Workbook book = new Workbook();
 		
@@ -38,7 +40,8 @@ class WorksheetTest {
 	}
 	
 	@Test
-	void testWorksheet_getHeightAndWidthCorrectly_createsCellsAndReturnsHeightAndWidth() {	
+	void testWorksheet_getHeightAndWidthCorrectly_createsCellsAndReturnsHeightAndWidth() 
+	{	
 		
 		Workbook book = new Workbook();
 		
@@ -52,7 +55,8 @@ class WorksheetTest {
 	}
 	
 	@Test
-	void testWorksheet_getCellAtWithInvalidBounds_throwsIllegalArgumentException() {	
+	void testWorksheet_getCellAtWithInvalidBounds_throwsIllegalArgumentException()
+	{	
 		
 		Workbook book = new Workbook();		
 		Worksheet sheet = new Worksheet(book, 2, 3);
@@ -71,8 +75,35 @@ class WorksheetTest {
 	}
 
 	@Test
-	void testWorksheet_getCellFromStringId_returnsAppropriateCell() {	
+	void testWorksheet_getCellFromStringIdWithValidId_returnsAppropriateCell() throws InvalidCellReferenceException 
+	{	
 		
-		//Todo:	
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		assertNotNull(sheet.getCell("A1"));
+		assertNotNull(sheet.getCell("B2"));
+		assertNotNull(sheet.getCell("B3"));
+		assertNotNull(sheet.getCell("A3"));
+	}
+	
+	@Test
+	void testWorksheet_getCellFromStringIdWithInvalidId_throwsInvalidCellReferenceException()
+	{		
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		assertThrows(InvalidCellReferenceException.class, () -> {
+			sheet.getCell("C1");
+		});
+		assertThrows(InvalidCellReferenceException.class, () -> {
+			sheet.getCell("A5");
+		});
+		assertThrows(InvalidCellReferenceException.class, () -> {
+			sheet.getCell("AA");
+		});
+		assertThrows(InvalidCellReferenceException.class, () -> {
+			sheet.getCell("12");
+		});		
 	}
 }
