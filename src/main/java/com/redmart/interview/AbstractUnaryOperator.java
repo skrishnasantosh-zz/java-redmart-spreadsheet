@@ -4,9 +4,11 @@ import java.util.Stack;
 
 public abstract class AbstractUnaryOperator extends AbstractOperator implements IOperator 
 {
+	private static final int UNARYOPCODELENGTH = 2;
+	
 	public AbstractUnaryOperator(String opcode) 
 	{
-		super(opcode);
+		super(opcode, UNARYOPCODELENGTH);
 	}
 
 	@Override

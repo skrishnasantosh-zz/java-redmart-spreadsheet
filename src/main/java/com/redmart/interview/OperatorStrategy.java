@@ -18,6 +18,13 @@ public class OperatorStrategy
 		//So manually add the classes
 		
 		operators.add(new AdditionOperator());
+		operators.add(new SubtractionOperator());
+		operators.add(new MultiplicationOperator());
+		operators.add(new DivisionOperator());
+		operators.add(new IncrementOperator());
+		operators.add(new DecrementOperator());		
+		operators.add(new NumericConstantOperator());
+		operators.add(new NopOperator());
 	}
 	
 	public IOperator getOperator(String token) throws OperatorNotFoundException
@@ -25,8 +32,9 @@ public class OperatorStrategy
 		try 
 		{
 			 Optional<IOperator> operator = operators.stream()
-					 								 .filter((o) -> o.getOpcode().toUpperCase().trim() == 
-					 								 				token.toUpperCase().trim())
+					 								 .filter((o) -> o.opcodeMatch(token
+					 										 						.toUpperCase()
+					 										 						.trim()))
 					 								 .findFirst();
 			
 			return operator.get();

@@ -4,6 +4,6 @@ import java.util.Stack;
 
 public interface IOperator
 {
-	String getOpcode();
+	boolean opcodeMatch(String opcode);
 	void operate(String token, Stack<Double> stack) throws FormulaEvaluatorException;
 }

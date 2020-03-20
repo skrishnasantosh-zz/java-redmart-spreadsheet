@@ -1,20 +1,30 @@
 package main.java.com.redmart.interview;
 
 import java.util.logging.Logger;
+import java.util.regex.*;
 
 public abstract class AbstractOperator implements IOperator 
 {
 	protected Logger logger;
 	private String opCode;
+	private int expectedOpcodeLength;
 	
-	public AbstractOperator(String opcode)
+	protected AbstractOperator(String opcode, int expectedOpcodeLength)
 	{
 		opCode = opcode;
+		this.expectedOpcodeLength = expectedOpcodeLength;	
 	}
 	
-	public String getOpcode() 
+	protected AbstractOperator(String opcode)
+	{
+		this(opcode, 1);	
+	}
+	
+	public boolean opcodeMatch(String opcode) 
 	{ 
-		return opCode;
+		opcode = opcode.trim();
+		
+		return opcode == opCode && opcode.length() == this.expectedOpcodeLength;
 	}
 	
 	public AbstractOperator()
