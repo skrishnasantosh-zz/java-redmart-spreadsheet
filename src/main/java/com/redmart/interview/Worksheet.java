@@ -14,7 +14,7 @@ public class Worksheet {
 	private int height, width;    
 	
 	public Worksheet(Workbook book, int height, int width)
-	{		
+	{	
 		LOGGER.setUseParentHandlers(false);
 		
 		if (height <= 0 || width <= 0 || book == null)
@@ -66,35 +66,41 @@ public class Worksheet {
 			String colRefStr = cellId.substring(1);
 			
 			try 
-			{
+			{   
 				int colIdx = Integer.parseInt(colRefStr) - 1; // zero based index
 				int rowIdx = (int)(firstChar - 'A'); // zero based index
 				
 				if (rowIdx < 0 || colIdx < 0 || 
 					rowIdx >= height || colIdx >= width)
 				{
-					LOGGER.severe("row or col is outside the bounds of worksheet ".concat(colRefStr));
-					throw new InvalidCellReferenceException();
+					String message = String.format("%s - row or col is outside the bounds of worksheet", colRefStr);
+					
+					LOGGER.severe(message);					
+					throw new InvalidCellReferenceException(message);					
 				}
 				
 				node = cells[rowIdx][colIdx];
 				
 				if (node == null)  // create the cell if it is not yet initialized as this cell is being referenced
 				{
-					cells[rowIdx][colIdx] = new CellNode();
+					cells[rowIdx][colIdx] = new CellNode(this, String.format("%s%d", firstChar, (colIdx + 1)), rowIdx, colIdx);
 					node = cells[rowIdx][colIdx];
 				}				
 			}
 			catch (NumberFormatException e)	
 			{
-				LOGGER.log(Level.SEVERE, "invalid column reference ".concat(colRefStr), e);
-				throw new InvalidCellReferenceException();
+				String message = String.format("invalid column reference %s", colRefStr);
+				
+				LOGGER.log(Level.SEVERE, message, e);				
+				throw new InvalidCellReferenceException(message);
 			}
 		}
 		else
 		{
-			LOGGER.severe("invalid cell id ".concat(cellId));
-			throw new InvalidCellReferenceException();
+			String message = String.format("invalid cell id %s", cellId);
+						
+			LOGGER.severe(message);
+			throw new InvalidCellReferenceException(message);
 		}
 		
 		return node;
