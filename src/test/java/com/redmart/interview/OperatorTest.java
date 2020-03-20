@@ -91,8 +91,8 @@ public class OperatorTest
 	private Stack<Double> getTwoOperands(double lValue, double rValue)
 	{
 		Stack<Double> stack = new Stack<Double>();
-		stack.add(rValue);
-		stack.add(lValue);		
+		stack.add(lValue);
+		stack.add(rValue);		
 		
 		return stack;
 	}
