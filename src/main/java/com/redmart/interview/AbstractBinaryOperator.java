@@ -1,13 +1,14 @@
 package main.java.com.redmart.interview;
 
 import java.util.Stack;
-import java.util.logging.Logger;
 
 public abstract class AbstractBinaryOperator extends AbstractOperator implements IOperator 
 {	
+	public static final int BINARYOPCODELENGTH = 1;
+	
 	public AbstractBinaryOperator(String opcode) 
 	{
-		super(opcode);
+		super(opcode, BINARYOPCODELENGTH);
 	}
 
 	@Override

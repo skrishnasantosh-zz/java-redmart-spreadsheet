@@ -2,6 +2,7 @@ package test.java.com.redmart.interview;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,4 +32,16 @@ public class FormulaEvaluatorTest
 			evaluator.evaluate();
 		});
 	}
+	
+	@Test
+	public void testEvaluate_whenValidInputsAreGiven_shouldCalculate() throws FormulaEvaluatorException
+	{
+		//arrange
+		String[] rpnFormula = "15 7 1 1 + - / 3 * 2 1 1 + + /".split(" ");
+		FormulaEvaluator evaluator = new FormulaEvaluator(rpnFormula);
+		
+		//assert and act
+		assertEquals(5, evaluator.evaluate());
+	}
+	
 }

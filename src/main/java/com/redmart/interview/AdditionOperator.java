@@ -15,3 +15,4 @@ public class AdditionOperator extends AbstractBinaryOperator implements IOperato
 		return lValue + rValue;
 	}	
 }
+ 

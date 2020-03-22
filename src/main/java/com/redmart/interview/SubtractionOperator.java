@@ -10,14 +10,6 @@ public class SubtractionOperator extends AbstractBinaryOperator implements IOper
 	}
 	
 	@Override
-	public boolean opcodeMatch(String opcode)
-	{
-		opcode = opcode.trim();
-		
-		return opcode == OPCODE && opcode.length() == 1;
-	}
-	
-	@Override
 	protected double Calculate(double lValue, double rValue) 
 	{
 		return lValue - rValue;

@@ -7,6 +7,7 @@ public class FormulaEvaluator
 {
 	private static final Logger LOGGER = Logger.getLogger(FormulaEvaluator.class.getName());
 	private String[] formula;
+	private OperatorStrategy strategy;
 	
 	public FormulaEvaluator(String[] rpnFormula)
 	{
@@ -14,6 +15,7 @@ public class FormulaEvaluator
 			throw new IllegalArgumentException();
 		
 		formula = rpnFormula;
+		strategy = new OperatorStrategy();
 	}
 	
 	public boolean hasCellReference()
@@ -33,10 +35,15 @@ public class FormulaEvaluator
 			return null;
 		
 		Stack<Double> stack = new Stack<Double>();
-		
-		for (String token: formula)
+				
+		for (String token: formula)   
 		{
-			//todo: operators
+			IOperator operator = strategy.getOperator(token);			
+		
+			String message = String.format("found operator of type %s for the value %s", operator.getClass().getName(), token);
+			LOGGER.info(message);
+			
+			operator.operate(token, stack);
 		}
 		
 		if (stack.size() != 1)
