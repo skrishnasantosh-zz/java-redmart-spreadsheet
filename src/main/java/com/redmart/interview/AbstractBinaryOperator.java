@@ -1,5 +1,6 @@
 package main.java.com.redmart.interview;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public abstract class AbstractBinaryOperator extends AbstractOperator implements IOperator 
@@ -12,22 +13,24 @@ public abstract class AbstractBinaryOperator extends AbstractOperator implements
 	}
 
 	@Override
-	public void operate(String token, Stack<Double> stack) throws FormulaEvaluatorException 
-	{	
-		if (stack.size() < 2)
+	public void operate(String token, Stack<Double> stack) throws OperandMismatchException 
+	{			
+		try 
+		{
+			Double rValue = stack.pop();
+			Double lValue = stack.pop();
+			
+			Double value = Calculate(lValue, rValue);
+			
+			stack.push(value);
+		}
+		catch (EmptyStackException ex)
 		{
 			String message = String.format("not enough operands for the operator %s", token);
 			
-			logger.severe(message);			
-			throw new FormulaEvaluatorException(message);
+			logger.severe(message);
+			throw new OperandMismatchException(message);
 		}
-		
-		Double rValue = stack.pop();
-		Double lValue = stack.pop();
-		
-		Double value = Calculate(lValue, rValue);
-		
-		stack.push(value);
 	}	
 	
 	protected abstract double Calculate(double lValue, double rValue);

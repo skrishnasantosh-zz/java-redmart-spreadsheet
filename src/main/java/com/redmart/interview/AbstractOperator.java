@@ -11,7 +11,10 @@ public abstract class AbstractOperator implements IOperator
 	protected AbstractOperator(String opcode, int expectedOpcodeLength)
 	{
 		opCode = opcode.trim();
-		this.expectedOpcodeLength = expectedOpcodeLength;	
+		this.expectedOpcodeLength = expectedOpcodeLength;
+		
+		logger = Logger.getLogger(this.getClass().getName());
+		logger.setUseParentHandlers(false);
 	}
 	
 	public boolean opcodeMatch(String opcode) 
@@ -22,11 +25,5 @@ public abstract class AbstractOperator implements IOperator
 		int length = opcode.length();
 		
 		return opEquals && length == this.expectedOpcodeLength;
-	}
-	
-	public AbstractOperator()
-	{
-		logger = Logger.getLogger(this.getClass().getName());
-		logger.setUseParentHandlers(false);
-	}
+	}	
 }

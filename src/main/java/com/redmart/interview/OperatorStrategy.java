@@ -33,9 +33,12 @@ public class OperatorStrategy
 	public IOperator getOperator(String token) throws OperatorNotFoundException
 	{
 		try 
-		{
+		{	
+			if (token == null || token.trim().isEmpty())
+				return null;
+			
 			 IOperator operator = operators.stream()
-		 								   .filter((o) -> o.opcodeMatch(token.trim()))
+		 								   .filter((o) -> o.opcodeMatch(token))
 		 								   .findAny()
 		 								   .orElse(null);
 

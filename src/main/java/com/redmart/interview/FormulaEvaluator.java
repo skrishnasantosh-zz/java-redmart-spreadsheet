@@ -11,6 +11,8 @@ public class FormulaEvaluator
 	
 	public FormulaEvaluator(String[] rpnFormula)
 	{
+		LOGGER.setUseParentHandlers(false);
+		
 		if (rpnFormula == null)
 			throw new IllegalArgumentException();
 		
@@ -38,15 +40,21 @@ public class FormulaEvaluator
 				
 		for (String token: formula)   
 		{
-			IOperator operator = strategy.getOperator(token);			
-		
+			IOperator operator = strategy.getOperator(token);
+			
+			if (operator == null)
+				continue;
+				
 			String message = String.format("found operator of type %s for the value %s", operator.getClass().getName(), token);
 			LOGGER.info(message);
+			
+			logStack(token, stack);
 			
 			operator.operate(token, stack);
 		}
 		
-		if (stack.size() != 1)
+		int stackSize = stack.size();		
+		if (stackSize != 1)
 		{
 			String message = String.format("formula evaluation failed as formula is not balanced", String.join(" ", formula));
 						
@@ -54,6 +62,25 @@ public class FormulaEvaluator
 			throw new FormulaEvaluatorException(message);
 		}
 		
-		return stack.pop();
+		return stack.pop();		
+	}
+	
+	private void logStack(String token, Stack<Double> stack) 
+	{
+		StringBuilder messageBuilder = new StringBuilder();
+		
+		messageBuilder.append("Stack : ");
+				
+		for (Double d : stack) 
+		{
+			messageBuilder.append(d);
+			messageBuilder.append(", ");
+		}
+			
+		messageBuilder.append(String.format(" Operator : %s", token));
+		
+		String message = messageBuilder.toString();
+		
+		LOGGER.info(message);		
 	}
 }

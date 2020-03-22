@@ -12,14 +12,14 @@ public abstract class AbstractUnaryOperator extends AbstractOperator implements 
 	}
 
 	@Override
-	public void operate(String token, Stack<Double> stack) throws FormulaEvaluatorException 
+	public void operate(String token, Stack<Double> stack) throws OperandMismatchException 
 	{
 		if (stack.size() < 1)
 		{
 			String message = String.format("not enough operands for the operator %s", token);
 			
 			logger.severe(message);			
-			throw new FormulaEvaluatorException(message);
+			throw new OperandMismatchException(message);
 		}
 		
 		Double value = stack.pop();		

@@ -2,6 +2,7 @@ package test.java.com.redmart.interview;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -30,60 +31,67 @@ public class OperatorStrategyTest
 		
 		
 		// act and assert
-		IOperator operator1 = strategy.getOperator("+");
-		String className = operator1.getClass().getName();
+		IOperator operator = strategy.getOperator("+");
+		String className = operator.getClass().getName();
 		
-		assertNotNull(operator1);
+		assertNotNull(operator);
 		assertEquals(AdditionOperator.class.getName(), className);		
 		
-		IOperator operator2 = strategy.getOperator("-");
+		operator = strategy.getOperator("-");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator2);
+		assertNotNull(operator);
 		assertEquals(SubtractionOperator.class.getName(), className);
 		
-		IOperator operator3 = strategy.getOperator("*");
+		operator = strategy.getOperator("*");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator3);
+		assertNotNull(operator);
 		assertEquals(MultiplicationOperator.class.getName(), className);
 		
-		IOperator operator4 = strategy.getOperator("/");
+		operator = strategy.getOperator("/");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator4);
+		assertNotNull(operator);
 		assertEquals(DivisionOperator.class.getName(), className);
 		
-		IOperator operator5 = strategy.getOperator("++");
+		operator = strategy.getOperator("++");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator5);
+		assertNotNull(operator);
 		assertEquals(IncrementOperator.class.getName(), className);
 		
-		IOperator operator6 = strategy.getOperator("--");
+		operator = strategy.getOperator("--");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator6);
+		assertNotNull(operator);
 		assertEquals(DecrementOperator.class.getName(), className);
 		
-		IOperator operator7 = strategy.getOperator("");
+		operator = strategy.getOperator("");			
+		assertNull(operator);
 		
-		assertNotNull(operator7);
-		assertEquals(NopOperator.class.getName(), className);
+		operator = strategy.getOperator("1");
+		className = operator.getClass().getName();
 		
-		IOperator operator8 = strategy.getOperator("1");
-		
-		assertNotNull(operator8);
+		assertNotNull(operator);
 		assertEquals(NumericConstantOperator.class.getName(), className);
 		
-		IOperator operator9 = strategy.getOperator("1.1992");
+		operator = strategy.getOperator("1.1992");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator9);
+		assertNotNull(operator);
 		assertEquals(NumericConstantOperator.class.getName(), className);
 		
-		IOperator operator10 = strategy.getOperator("-1.1992");
+		operator = strategy.getOperator("-1.1992");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator10);
+		assertNotNull(operator);
 		assertEquals(NumericConstantOperator.class.getName(), className);
 		
-		IOperator operator11 = strategy.getOperator("A1");
+		operator = strategy.getOperator("A1");
+		className = operator.getClass().getName();
 		
-		assertNotNull(operator11);
+		assertNotNull(operator);
 		assertEquals(CellReferenceOperator.class.getName(), className);
 	}
 	

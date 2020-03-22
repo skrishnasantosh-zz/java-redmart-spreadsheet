@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import main.java.com.redmart.interview.FormulaEvaluator;
 import main.java.com.redmart.interview.FormulaEvaluatorException;
+import main.java.com.redmart.interview.OperandMismatchException;
 
 public class FormulaEvaluatorTest 
 {
@@ -21,14 +22,26 @@ public class FormulaEvaluatorTest
 		assertTrue(evaluator.hasCellReference());
 	}
 	
-	@Test
+	@Test	
 	public void testEvaluate_imbalancedFormula_throwsFormulaEvaluationException()
 	{
 		//arrange
-		FormulaEvaluator evaluator = new FormulaEvaluator(new String[] { "A1", "+" });
+		FormulaEvaluator evaluator = new FormulaEvaluator(new String[] { "3", "2", "1", "+" });
 		
 		//assert and act
 		assertThrows(FormulaEvaluatorException.class, () -> {
+			evaluator.evaluate();
+		});
+	}
+	
+	@Test	
+	public void testEvaluate_lessOperands_throwsFormulaEvaluationException()
+	{
+		//arrange
+		FormulaEvaluator evaluator = new FormulaEvaluator(new String[] { "1", "+" });
+		
+		//assert and act
+		assertThrows(OperandMismatchException.class, () -> {
 			evaluator.evaluate();
 		});
 	}
@@ -37,7 +50,7 @@ public class FormulaEvaluatorTest
 	public void testEvaluate_whenValidInputsAreGiven_shouldCalculate() throws FormulaEvaluatorException
 	{
 		//arrange
-		String[] rpnFormula = "15 7 1 1 + - / 3 * 2 1 1 + + /".split(" ");
+		String[] rpnFormula = "15 7 1 1 + - / 3 * 2 1 1 + + -".split(" ");
 		FormulaEvaluator evaluator = new FormulaEvaluator(rpnFormula);
 		
 		//assert and act
