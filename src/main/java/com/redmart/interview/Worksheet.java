@@ -1,6 +1,7 @@
 package main.java.com.redmart.interview;
 
 import java.util.logging.Logger;
+import java.io.PrintStream;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -9,22 +10,20 @@ public class Worksheet {
 	
 	private static final Logger LOGGER = Logger.getLogger(Worksheet.class.getName());
 	
-	private CellNode cells[][];
-	private Workbook parent;	
+	private CellNode cells[][];		
 	private int height, width;
 	private Double value;
 	
 	private String[] formula;
 	private String[] resolved;
 		
-	public Worksheet(Workbook book, int height, int width)
+	public Worksheet(int height, int width)
 	{	
 		LOGGER.setUseParentHandlers(false);
 		
-		if (height <= 0 || width <= 0 || book == null)
-			throw new IllegalArgumentException();
-						
-		this.parent = book;
+		if (height <= 0 || width <= 0)
+			throw new IllegalArgumentException();						
+		
 		cells = new CellNode[height][width];
 		
 		this.height = height;    
@@ -110,9 +109,9 @@ public class Worksheet {
 		return node;
 	}	
 		
-	public void dumpTo(IOutputSource outSource)
+	public void dumpTo(PrintStream stream)
 	{
-		
+		//
 	}	
 	
 	

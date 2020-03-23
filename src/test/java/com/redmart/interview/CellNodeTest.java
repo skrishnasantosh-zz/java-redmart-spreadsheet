@@ -15,10 +15,8 @@ public class CellNodeTest
 	@Test
 	public void testCellNode_setCellValueAsNull_shouldSetCellValueAsNull() throws InvalidCellReferenceException, FormulaEvaluatorException
 	{
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);		
-		
+		// arrange		
+		Worksheet sheet = new Worksheet(2, 3);
 		CellNode node = sheet.getCell("A1");
 		
 		// act		

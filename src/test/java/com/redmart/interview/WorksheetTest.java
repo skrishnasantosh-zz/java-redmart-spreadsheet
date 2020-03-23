@@ -19,39 +19,29 @@ class WorksheetTest
 	@Test
 	void testWorksheet_invalidArgumentsToConstructor_throwsIllegalArgumentException() 
 	{	
-		// arrange
-		Workbook book = new Workbook();
-		
-		// act and assert		
+		// arrange, act and assert		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Worksheet(book, 0, 20);
+			new Worksheet(0, 20);
 		});
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Worksheet(book, 20, 0);
+			new Worksheet(20, 0);
 		});
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Worksheet(null, 20, 20);
+			new Worksheet(0, 0);
 		});
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Worksheet(null, 0, 0);
-		});
-		
-		assertThrows(IllegalArgumentException.class, () -> {
-			new Worksheet(null, -1, -1);
+			new Worksheet(-1, -1);
 		});
 	}
 	
 	@Test
 	void testWorksheet_getHeightAndWidthCorrectly_createsCellsAndReturnsHeightAndWidth() 
 	{	
-		// arrange
-		Workbook book = new Workbook();
-		
-		// act
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange and act
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		
 		// assert
@@ -65,9 +55,8 @@ class WorksheetTest
 	@Test
 	void testGetCell_atWithInvalidBounds_throwsIllegalArgumentException()
 	{	
-		// arrange
-		Workbook book = new Workbook();		
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange			
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act and assert		
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -87,8 +76,7 @@ class WorksheetTest
 	void testGetCell_fromStringIdWithValidId_returnsAppropriateCell() throws InvalidCellReferenceException 
 	{	
 		// arrange		
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act and assert		
 		assertNotNull(sheet.getCell("A1"));
@@ -117,9 +105,8 @@ class WorksheetTest
 	@Test
 	void testGetCell_fromStringIdWithInvalidId_throwsInvalidCellReferenceException()
 	{		
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange	
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act and assert
 		assertThrows(InvalidCellReferenceException.class, () -> {
@@ -139,9 +126,8 @@ class WorksheetTest
 	@Test
 	void testSetCellFormula_setNumericExpression_shouldCalculateTheExpressionAndStoreInResult() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
 	{		
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange		
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act 
 		sheet.setCellFormula("A1", "5 3 *");
@@ -154,9 +140,8 @@ class WorksheetTest
 	@Test
 	void testSetCellFormula_setCellReference_shouldSetFormulaAsSuchAndCreateEdges() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
 	{		
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange		
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act 
 		sheet.setCellFormula("A1", "A2 3 *");
@@ -169,9 +154,8 @@ class WorksheetTest
 	@Test
 	void testSetCellFormula_setCellReferenceWithOtherCells_shouldSetCorrectValues() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
 	{		
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange		
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act 
 		sheet.setCellFormula("A1", "A2 ++");
@@ -200,9 +184,8 @@ class WorksheetTest
 	@Test
 	void testSetCellFormula_setCellReferenceWithCycles_shouldThrowCyclicDependencyException() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
 	{
-		// arrange
-		Workbook book = new Workbook();
-		Worksheet sheet = new Worksheet(book, 2, 3);
+		// arrange		
+		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act 
 		sheet.setCellFormula("A1", "A2 3 *");
