@@ -6,18 +6,19 @@ import java.util.logging.Logger;
 public class FormulaEvaluator 
 {
 	private static final Logger LOGGER = Logger.getLogger(FormulaEvaluator.class.getName());
+	
 	private String[] formula;
 	private OperatorStrategy strategy;
-	
-	public FormulaEvaluator(String[] rpnFormula)
+		
+	public FormulaEvaluator(String[] formula)
 	{
 		LOGGER.setUseParentHandlers(false);
-		
-		if (rpnFormula == null)
-			throw new IllegalArgumentException();
-		
-		formula = rpnFormula;
 		strategy = new OperatorStrategy();
+		
+		this.formula = formula;
+		
+		if (formula == null)
+			throw new IllegalArgumentException();
 	}
 	
 	public boolean hasCellReference()
@@ -33,6 +34,9 @@ public class FormulaEvaluator
 	
 	public Double evaluate() throws FormulaEvaluatorException
 	{
+		if (formula == null)
+			throw new IllegalArgumentException();
+		
 		if (formula.length == 0)
 			return null;
 		

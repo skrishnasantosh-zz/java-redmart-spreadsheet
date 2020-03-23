@@ -1,28 +1,31 @@
 package main.java.com.redmart.interview;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class CellNode 
+public class CellNode
 {
 	private Double value;
 	private List<String> formula;
-	private List<String> resolvedFormula;
+	private String[] resolvedFormula;
 	
 	private List<CellNode> edges;
+	
 	private String name;
 	private Position position;
 	
-	private Worksheet parent;
-	
-	private FormulaEvaluator formulaEvaluator;
 	private boolean isReady;
 	
-	public CellNode(Worksheet sheet, String id, int row, int col)
-	{
-		this.parent = sheet;
+	private CellNodeObserver observer;
+	
+	public CellNode(String id, int row, int col)
+	{		
 		name = id;
 		position = new Position(row, col);
+		edges = new ArrayList<CellNode>();
+		
+		observer = new CellNodeObserver(this);
 	}
 	
 	public Position getPosition()
@@ -33,11 +36,6 @@ public class CellNode
 	public String getName()
 	{
 		return name;
-	}
-	
-	public List<String> getFormulae()
-	{
-		return formula;
 	}
 	
 	public int getFormulaCount()
@@ -55,35 +53,78 @@ public class CellNode
 		return edges.size();
 	}
 	
+	public void addEdge(CellNode cell)
+	{
+		edges.add(cell);
+	}	
+	
+	public CellNodeObserver getObserver()
+	{
+		return observer;
+	}
+	
+	public void onNotify(CellNode updatedNode) throws FormulaEvaluatorException
+	{
+		for (int i = 0; i < this.getFormulaCount(); i ++)
+		{
+			if (formula.get(i).equalsIgnoreCase(updatedNode.getName()) &&
+				updatedNode.getValue() != null)
+			{
+				resolvedFormula[i] = updatedNode.getValue().toString();
+				break;
+			}
+		}
+		
+		evaluate();
+	}
+	
 	public Double getValue()
 	{
 		return value;
 	}
-	
-	public Iterable<String> getResolvedFormulae()
-	{
-		return resolvedFormula;
-	}
-	
-	public void setValue(Double value)
+
+	public void setValue(Double value) throws FormulaEvaluatorException
 	{
 		this.value = value;
-		
-		//todo: notify observers
+		observer.sendNotify();
 	}
 	
+	public String getFormulaAsString()
+	{
+		return String.join(" ", formula);
+	}
+	
+	public Iterable<String> getFormula()
+	{
+		return formula;
+	}
+	
+	public void setFormula(String[] formula)
+	{
+		this.formula = new ArrayList<String>();
+		this.resolvedFormula = new String[formula.length];
+		
+		for(String token : formula)
+		{
+			this.formula.add(token);			
+		}
+		
+		this.resolvedFormula = formula.clone();
+	}	
+		
 	public boolean isReady()
 	{
 		return isReady;
 	}
 	
-	public void Evaluate()
+	public void evaluate() throws FormulaEvaluatorException
 	{
-		CompletableFuture.runAsync(() -> { 
-			isReady = false;
-			
-		}).thenRun(() -> {
-			isReady = true;
-		});
+		FormulaEvaluator evaluator = new FormulaEvaluator(resolvedFormula);
+		
+		if (evaluator.hasCellReference())
+			return;
+		
+		Double result = evaluator.evaluate();
+		setValue(result);
 	}
 }

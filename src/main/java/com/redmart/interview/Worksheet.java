@@ -11,8 +11,12 @@ public class Worksheet {
 	
 	private CellNode cells[][];
 	private Workbook parent;	
-	private int height, width;    
+	private int height, width;
+	private Double value;
 	
+	private String[] formula;
+	private String[] resolved;
+		
 	public Worksheet(Workbook book, int height, int width)
 	{	
 		LOGGER.setUseParentHandlers(false);
@@ -23,7 +27,7 @@ public class Worksheet {
 		this.parent = book;
 		cells = new CellNode[height][width];
 		
-		this.height = height;
+		this.height = height;    
 		this.width = width;
 	}
 	
@@ -49,8 +53,8 @@ public class Worksheet {
 			throw new IllegalArgumentException();
 		
 		return cells[row][col];
-	}
-	
+	}	
+		
 	public CellNode getCell(String cellId) throws InvalidCellReferenceException
 	{
 		CellNode node = null;
@@ -83,7 +87,7 @@ public class Worksheet {
 				
 				if (node == null)  // create the cell if it is not yet initialized as this cell is being referenced
 				{
-					cells[rowIdx][colIdx] = new CellNode(this, String.format("%s%d", firstChar, (colIdx + 1)), rowIdx, colIdx);
+					cells[rowIdx][colIdx] = new CellNode(String.format("%s%d", firstChar, (colIdx + 1)), rowIdx, colIdx);
 					node = cells[rowIdx][colIdx];
 				}				
 			}
@@ -105,9 +109,70 @@ public class Worksheet {
 		
 		return node;
 	}	
-	
+		
 	public void dumpTo(IOutputSource outSource)
 	{
 		
 	}	
+	
+	
+	public void setCellFormula(String cellId, String formula) throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	{
+        if (formula == null || formula.isEmpty())
+        	throw new IllegalArgumentException(formula);
+        
+        CellNode cell = getCell(cellId);
+
+        // Cell value will not be null when it gets here        
+        String[] tokens = formula.split(" ");
+        
+        FormulaEvaluator evaluator = new FormulaEvaluator(tokens);
+        
+        cell.setFormula(tokens);
+        
+        if (evaluator.hasCellReference())
+        {
+        	 cell.setValue(null);
+        	 createGraphEdges(cell, tokens);        	 
+        }
+        else        	
+        {        	
+        	Double value = evaluator.evaluate();        	
+        	cell.setValue(value);        	
+        }
+	}
+	
+	private void createGraphEdges(CellNode cell, String[] formula) throws InvalidCellReferenceException, CyclicDependencyException, FormulaEvaluatorException
+	{
+		//Todo: Observers
+		for (String token : formula)
+		{
+			if (Character.isLetter(token.charAt(0))) 
+			{
+				CellNode edge = getCell(token);				
+				cell.addEdge(edge);
+				
+				checkCycles(cell, null);
+				
+				edge.getObserver().add(cell);
+				edge.getObserver().sendNotify(cell);
+			}
+		}
+	}
+	
+	private void checkCycles(CellNode source, CellNode recurse) throws CyclicDependencyException
+	{
+		if (recurse == null)
+			recurse = source;
+		
+		Iterable<CellNode> edges = recurse.getEdges();
+		
+		for (CellNode node : edges)
+		{
+			if (node.getName().equalsIgnoreCase(source.getName()))
+				throw new CyclicDependencyException(source.getName());
+			
+			checkCycles(source, node);
+		}
+	}
 }

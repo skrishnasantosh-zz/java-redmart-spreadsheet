@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.redmart.interview.CellNode;
+import main.java.com.redmart.interview.CyclicDependencyException;
+import main.java.com.redmart.interview.FormulaEvaluatorException;
 import main.java.com.redmart.interview.InvalidCellReferenceException;
 import main.java.com.redmart.interview.Workbook;
 import main.java.com.redmart.interview.Worksheet;
@@ -60,7 +63,7 @@ class WorksheetTest
 	}
 	
 	@Test
-	void testWorksheet_getCellAtWithInvalidBounds_throwsIllegalArgumentException()
+	void testGetCell_atWithInvalidBounds_throwsIllegalArgumentException()
 	{	
 		// arrange
 		Workbook book = new Workbook();		
@@ -81,7 +84,7 @@ class WorksheetTest
 	}
 
 	@Test
-	void testWorksheet_getCellFromStringIdWithValidId_returnsAppropriateCell() throws InvalidCellReferenceException 
+	void testGetCell_fromStringIdWithValidId_returnsAppropriateCell() throws InvalidCellReferenceException 
 	{	
 		// arrange		
 		Workbook book = new Workbook();
@@ -112,7 +115,7 @@ class WorksheetTest
 	}
 	
 	@Test
-	void testWorksheet_getCellFromStringIdWithInvalidId_throwsInvalidCellReferenceException()
+	void testGetCell_fromStringIdWithInvalidId_throwsInvalidCellReferenceException()
 	{		
 		// arrange
 		Workbook book = new Workbook();
@@ -131,5 +134,76 @@ class WorksheetTest
 		assertThrows(InvalidCellReferenceException.class, () -> {
 			sheet.getCell("12");
 		});		
+	}
+	
+	@Test
+	void testSetCellFormula_setNumericExpression_shouldCalculateTheExpressionAndStoreInResult() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	{		
+		// arrange
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		// act 
+		sheet.setCellFormula("A1", "5 3 *");
+		CellNode cell = sheet.getCell("A1");
+		
+		// assert
+		assertEquals(15, cell.getValue());
+	}
+	
+	@Test
+	void testSetCellFormula_setCellReference_shouldSetFormulaAsSuchAndCreateEdges() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	{		
+		// arrange
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		// act 
+		sheet.setCellFormula("A1", "A2 3 *");
+		CellNode cell = sheet.getCell("A1");
+		
+		// assert
+		assertEquals("A2 3 *", cell.getFormulaAsString());
+	}
+	
+	@Test
+	void testSetCellFormula_setCellReferenceWithOtherCells_shouldSetCorrectValues() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	{		
+		// arrange
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		// act 
+		sheet.setCellFormula("A1", "A2 ++");
+		sheet.setCellFormula("A2", "4 5 *");
+		sheet.setCellFormula("A3", "A1 --");
+		sheet.setCellFormula("B1", "A1 A2 +");
+				
+		CellNode cellA1 = sheet.getCell("A1");
+		CellNode cellA2 = sheet.getCell("A2");
+		CellNode cellA3 = sheet.getCell("A3");
+		CellNode cellB1 = sheet.getCell("B1");
+		
+		// assert
+		assertEquals(21, cellA1.getValue());
+		assertEquals(20, cellA2.getValue());
+		assertEquals(20, cellA3.getValue());
+		assertEquals(41, cellB1.getValue());
+	}
+	
+	@Test
+	void testSetCellFormula_setCellReferenceWithCycles_shouldThrowCyclicDependencyException() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	{
+		// arrange
+		Workbook book = new Workbook();
+		Worksheet sheet = new Worksheet(book, 2, 3);
+		
+		// act 
+		sheet.setCellFormula("A1", "A2 3 *");
+		
+		// act and assert
+		assertThrows(CyclicDependencyException.class, () -> { 
+			sheet.setCellFormula("A2", "A1 2 *");	
+		});
 	}
 }
