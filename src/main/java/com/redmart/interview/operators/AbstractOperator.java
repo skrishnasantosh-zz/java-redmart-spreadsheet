@@ -1,6 +1,8 @@
-package main.java.com.redmart.interview;
+package main.java.com.redmart.interview.operators;
 
 import java.util.logging.Logger;
+
+import main.java.com.redmart.interview.IOperator;
 
 public abstract class AbstractOperator implements IOperator 
 {

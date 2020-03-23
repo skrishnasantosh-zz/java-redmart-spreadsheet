@@ -111,7 +111,21 @@ public class Worksheet {
 		
 	public void dumpTo(PrintStream stream)
 	{
-		//
+		stream.println(String.format("%d %d", width, height));
+		
+		for (int h = 0; h < this.height; h++)
+		{
+			for (int w = 0; w < this.width; w++)
+			{
+				CellNode cell = cells[h][w];
+				Double value = cell.getValue();
+				
+				if (cell != null && value != null)
+				{
+					stream.println(String.format("%.5f", value));
+				}
+			}
+		}
 	}	
 	
 	
@@ -143,7 +157,6 @@ public class Worksheet {
 	
 	private void createGraphEdges(CellNode cell, String[] formula) throws InvalidCellReferenceException, CyclicDependencyException, FormulaEvaluatorException
 	{
-		//Todo: Observers
 		for (String token : formula)
 		{
 			if (Character.isLetter(token.charAt(0))) 

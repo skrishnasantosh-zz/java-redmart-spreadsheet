@@ -1,4 +1,6 @@
-package main.java.com.redmart.interview;
+package main.java.com.redmart.interview.operators;
+
+import main.java.com.redmart.interview.IOperator;
 
 public class MultiplicationOperator extends AbstractBinaryOperator implements IOperator 
 {

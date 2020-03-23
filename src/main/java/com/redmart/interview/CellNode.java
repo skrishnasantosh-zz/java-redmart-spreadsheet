@@ -12,8 +12,7 @@ public class CellNode
 	
 	private List<CellNode> edges;
 	
-	private String name;
-	private Position position;
+	private String name;	
 	
 	private boolean isReady;
 	
@@ -21,18 +20,12 @@ public class CellNode
 	
 	public CellNode(String id, int row, int col)
 	{		
-		name = id;
-		position = new Position(row, col);
+		name = id;		
 		edges = new ArrayList<CellNode>();
 		
 		observer = new CellNodeObserver(this);
 	}
-	
-	public Position getPosition()
-	{
-		return position;
-	}
-	
+		
 	public String getName()
 	{
 		return name;

@@ -71,37 +71,7 @@ class WorksheetTest
 			sheet.getCellAt(103, 1003);	
 		});
 	}
-
-	@Test
-	void testGetCell_fromStringIdWithValidId_returnsAppropriateCell() throws InvalidCellReferenceException 
-	{	
-		// arrange		
-		Worksheet sheet = new Worksheet(2, 3);
 		
-		// act and assert		
-		assertNotNull(sheet.getCell("A1"));
-		assertNotNull(sheet.getCell("B2"));
-		assertNotNull(sheet.getCell("B3"));
-		assertNotNull(sheet.getCell("A3"));
-		
-		assertEquals("A1", sheet.getCell("A1").getName());
-		assertEquals(0, sheet.getCell("A1").getPosition().getRow());
-		assertEquals(0, sheet.getCell("A1").getPosition().getCol());
-		
-		assertEquals("B2", sheet.getCell("B2").getName());
-		assertEquals(1, sheet.getCell("B2").getPosition().getRow());
-		assertEquals(1, sheet.getCell("B2").getPosition().getCol());
-		
-		assertEquals("B3", sheet.getCell("b3").getName());
-		assertEquals(1, sheet.getCell("b3").getPosition().getRow());
-		assertEquals(2, sheet.getCell("b3").getPosition().getCol());
-		
-		assertEquals("A3", sheet.getCell("A3").getName());
-		assertEquals(0, sheet.getCell("A3").getPosition().getRow());
-		assertEquals(2, sheet.getCell("A3").getPosition().getCol());
-
-	}
-	
 	@Test
 	void testGetCell_fromStringIdWithInvalidId_throwsInvalidCellReferenceException()
 	{		
