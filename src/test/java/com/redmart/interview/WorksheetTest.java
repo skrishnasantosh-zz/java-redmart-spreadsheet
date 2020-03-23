@@ -177,18 +177,24 @@ class WorksheetTest
 		sheet.setCellFormula("A1", "A2 ++");
 		sheet.setCellFormula("A2", "4 5 *");
 		sheet.setCellFormula("A3", "A1 --");
-		sheet.setCellFormula("B1", "A1 A2 +");
+		sheet.setCellFormula("B1", "B2 1 -");
+		sheet.setCellFormula("B2", "A1 A2 +");
+		sheet.setCellFormula("B3", "B1 2 /");
 				
 		CellNode cellA1 = sheet.getCell("A1");
 		CellNode cellA2 = sheet.getCell("A2");
 		CellNode cellA3 = sheet.getCell("A3");
 		CellNode cellB1 = sheet.getCell("B1");
+		CellNode cellB2 = sheet.getCell("B2");
+		CellNode cellB3 = sheet.getCell("B3");
 		
 		// assert
 		assertEquals(21, cellA1.getValue());
 		assertEquals(20, cellA2.getValue());
 		assertEquals(20, cellA3.getValue());
-		assertEquals(41, cellB1.getValue());
+		assertEquals(40, cellB1.getValue());
+		assertEquals(41, cellB2.getValue());
+		assertEquals(20, cellB3.getValue());
 	}
 	
 	@Test
