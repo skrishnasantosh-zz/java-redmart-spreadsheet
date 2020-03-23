@@ -62,7 +62,7 @@ public class FormulaEvaluator
 			throw new FormulaEvaluatorException(message);
 		}
 		
-		return stack.pop();		
+		return stack.pop();
 	}
 	
 	private void logStack(String token, Stack<Double> stack) 
