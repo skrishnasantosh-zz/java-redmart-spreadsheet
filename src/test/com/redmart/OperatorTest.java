@@ -1,4 +1,4 @@
-package test.java.com.redmart.interview;
+package test.com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,9 +6,9 @@ import java.util.Stack;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.redmart.interview.FormulaEvaluatorException;
-import main.java.com.redmart.interview.IOperator;
-import main.java.com.redmart.interview.OperatorStrategy;
+import com.redmart.FormulaEvaluatorException;
+import com.redmart.IOperator;
+import com.redmart.OperatorStrategy;
 
 public class OperatorTest 
 {

@@ -1,4 +1,4 @@
-package main.java.com.redmart.interview;
+package com.redmart;
 
 public class FormulaEvaluatorException extends Exception
 {

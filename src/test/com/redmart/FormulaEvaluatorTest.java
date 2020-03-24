@@ -1,4 +1,4 @@
-package test.java.com.redmart.interview;
+package test.com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.redmart.interview.FormulaEvaluator;
-import main.java.com.redmart.interview.FormulaEvaluatorException;
+import com.redmart.FormulaEvaluator;
+import com.redmart.FormulaEvaluatorException;
 
 public class FormulaEvaluatorTest 
 {

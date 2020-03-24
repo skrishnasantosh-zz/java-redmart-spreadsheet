@@ -1,4 +1,4 @@
-package test.java.com.redmart.interview;
+package test.com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,7 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.redmart.interview.*;
+import com.redmart.CellReferenceOperator;
+import com.redmart.FormulaEvaluatorException;
+import com.redmart.GenericArithmeticOperator;
+import com.redmart.IOperator;
+import com.redmart.NumericConstantOperator;
+import com.redmart.OperatorStrategy;
 
 public class OperatorStrategyTest 
 {

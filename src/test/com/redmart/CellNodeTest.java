@@ -1,12 +1,12 @@
-package test.java.com.redmart.interview;
+package test.com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.redmart.interview.Worksheet;
-import main.java.com.redmart.interview.CellNode;
-import main.java.com.redmart.interview.FormulaEvaluatorException;
+import com.redmart.CellNode;
+import com.redmart.FormulaEvaluatorException;
+import com.redmart.Worksheet;
 
 public class CellNodeTest 
 {

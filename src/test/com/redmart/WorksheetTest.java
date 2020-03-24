@@ -1,14 +1,14 @@
-package test.java.com.redmart.interview;
+package test.com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.redmart.interview.CellNode;
-import main.java.com.redmart.interview.CyclicDependencyException;
-import main.java.com.redmart.interview.FormulaEvaluatorException;
-import main.java.com.redmart.interview.Worksheet;
+import com.redmart.CellNode;
+import com.redmart.CyclicDependencyException;
+import com.redmart.FormulaEvaluatorException;
+import com.redmart.Worksheet;
 
 class WorksheetTest
 {

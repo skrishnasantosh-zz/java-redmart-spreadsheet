@@ -1,8 +1,8 @@
-package main.java.com.redmart.interview;
+package com.redmart;
 
 import java.util.Stack;
 
-import main.java.com.redmart.interview.IOperator;
+import com.redmart.IOperator;
 
 public class CellReferenceOperator implements IOperator 
 {

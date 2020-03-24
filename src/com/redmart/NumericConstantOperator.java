@@ -1,9 +1,9 @@
-package main.java.com.redmart.interview;
+package com.redmart;
 
 import java.util.Stack;
 import java.util.logging.Logger;
 
-import main.java.com.redmart.interview.IOperator;
+import com.redmart.IOperator;
 
 public class NumericConstantOperator implements IOperator 
 {

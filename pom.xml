@@ -7,12 +7,12 @@
   <version>1.0</version>
  
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <exec.mainClass>main.java.com.redmart.interview.Spreadsheet</exec.mainClass>
+    <exec.mainClass>com.redmart.Spreadsheet</exec.mainClass>
   </properties>
   <build>
+    <sourceDirectory>src/com/redmart</sourceDirectory>
+    <testSourceDirectory>src/test/com/redmart</testSourceDirectory>
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -22,10 +22,10 @@
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.1</version>
-            <configuration>
-                <fork>true</fork>
-                <executable>C:\Program Files\Java\jdk1.8.0_241\bin\javac.exe</executable>
-            </configuration>
+            <configuration>            	
+            	<source>1.8</source>
+            	<target>1.8</target>
+        	</configuration>
         </plugin>
     </plugins>
   </build>

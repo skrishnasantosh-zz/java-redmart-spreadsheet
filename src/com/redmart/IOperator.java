@@ -1,4 +1,4 @@
-package main.java.com.redmart.interview;
+package com.redmart;
 
 import java.util.Stack;
 
