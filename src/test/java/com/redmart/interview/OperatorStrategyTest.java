@@ -8,14 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.redmart.interview.*;
-import main.java.com.redmart.interview.operators.AdditionOperator;
-import main.java.com.redmart.interview.operators.CellReferenceOperator;
-import main.java.com.redmart.interview.operators.DecrementOperator;
-import main.java.com.redmart.interview.operators.DivisionOperator;
-import main.java.com.redmart.interview.operators.IncrementOperator;
-import main.java.com.redmart.interview.operators.MultiplicationOperator;
-import main.java.com.redmart.interview.operators.NumericConstantOperator;
-import main.java.com.redmart.interview.operators.SubtractionOperator;
 
 public class OperatorStrategyTest 
 {
@@ -26,13 +18,13 @@ public class OperatorStrategyTest
 		OperatorStrategy strategy = new OperatorStrategy();
 		
 		// act and assert
-		assertThrows(OperatorNotFoundException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			strategy.getOperator("o_o");
 		});	
 	}
 	
 	@Test
-	public void testGetOperator_whenTokenIsProvided_getsMatchingOperator() throws OperatorNotFoundException
+	public void testGetOperator_whenTokenIsProvided_getsMatchingOperator() throws FormulaEvaluatorException
 	{
 		// arrange
 		OperatorStrategy strategy = new OperatorStrategy();
@@ -104,7 +96,7 @@ public class OperatorStrategyTest
 	}
 	
 	@Test
-	public void testGetOperator_whenCellReferenceIsProvided_getsCellReferenceOperator() throws OperatorNotFoundException
+	public void testGetOperator_whenCellReferenceIsProvided_getsCellReferenceOperator() throws FormulaEvaluatorException
 	{
 		// arrange
 		OperatorStrategy strategy = new OperatorStrategy();

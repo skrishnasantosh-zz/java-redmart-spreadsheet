@@ -1,8 +1,6 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
-import main.java.com.redmart.interview.IOperator;
-
-public class DecrementOperator extends AbstractUnaryOperator implements IOperator 
+public class DecrementOperator extends AbstractUnaryOperator
 {
 	private static final String OPCODE = "--";
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import main.java.com.redmart.interview.FormulaEvaluator;
 import main.java.com.redmart.interview.FormulaEvaluatorException;
-import main.java.com.redmart.interview.OperandMismatchException;
 
 public class FormulaEvaluatorTest 
 {
@@ -41,7 +40,7 @@ public class FormulaEvaluatorTest
 		FormulaEvaluator evaluator = new FormulaEvaluator(new String[] { "1", "+" });
 		
 		//assert and act
-		assertThrows(OperandMismatchException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			evaluator.evaluate();
 		});
 	}

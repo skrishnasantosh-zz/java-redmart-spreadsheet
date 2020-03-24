@@ -1,4 +1,4 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
 import java.util.logging.Logger;
 
@@ -27,5 +27,5 @@ public abstract class AbstractOperator implements IOperator
 		int length = opcode.length();
 		
 		return opEquals && length == this.expectedOpcodeLength;
-	}	
+	}
 }

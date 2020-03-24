@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import main.java.com.redmart.interview.FormulaEvaluatorException;
 import main.java.com.redmart.interview.IOperator;
-import main.java.com.redmart.interview.OperatorNotFoundException;
 import main.java.com.redmart.interview.OperatorStrategy;
 
 public class OperatorTest 
@@ -80,7 +79,7 @@ public class OperatorTest
 		return value;
 	}
 	
-	private IOperator getOperator(String opcode) throws OperatorNotFoundException
+	private IOperator getOperator(String opcode) throws FormulaEvaluatorException
 	{
 		OperatorStrategy strategy = new OperatorStrategy();
 		IOperator operator = strategy.getOperator(opcode);

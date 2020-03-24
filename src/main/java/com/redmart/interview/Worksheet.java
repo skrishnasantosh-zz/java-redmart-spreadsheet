@@ -2,8 +2,6 @@ package main.java.com.redmart.interview;
 
 import java.util.logging.Logger;
 import java.io.PrintStream;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 
 public class Worksheet {
@@ -12,10 +10,6 @@ public class Worksheet {
 	
 	private CellNode cells[][];		
 	private int height, width;
-	private Double value;
-	
-	private String[] formula;
-	private String[] resolved;
 		
 	public Worksheet(int height, int width)
 	{	

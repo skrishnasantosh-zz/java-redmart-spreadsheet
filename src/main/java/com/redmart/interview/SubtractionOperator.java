@@ -1,8 +1,6 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
-import main.java.com.redmart.interview.IOperator;
-
-public class SubtractionOperator extends AbstractBinaryOperator implements IOperator 
+public class SubtractionOperator extends AbstractBinaryOperator
 {
 	private static final String OPCODE = "-";
 

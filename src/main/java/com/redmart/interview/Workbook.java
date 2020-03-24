@@ -16,11 +16,11 @@ public class Workbook
 	public Worksheet createWorksheet(String source)
 	{
 		Worksheet sheet = null;
+		Scanner scanner = new Scanner(source);
 		
 		try 
 		{
-			//The first line is assumed to contain the dimensions w x h, parse it 
-			Scanner scanner = new Scanner(source);
+			//The first line is assumed to contain the dimensions w x h, parse it 			
 			if (!scanner.hasNextLine())
 				throw new InvalidInputException("");
 			
@@ -94,6 +94,10 @@ public class Workbook
 			System.out.println(message);
 			
 			System.exit(-4);
+		}
+		finally
+		{
+			scanner.close();;
 		}
 		
 		//Todo : Find out what to do with illegal argument exception and null pointer exception 

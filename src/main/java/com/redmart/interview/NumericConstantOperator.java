@@ -1,11 +1,9 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
 import java.util.Stack;
 import java.util.logging.Logger;
 
-import main.java.com.redmart.interview.FormulaEvaluatorException;
 import main.java.com.redmart.interview.IOperator;
-import main.java.com.redmart.interview.OperandMismatchException;
 
 public class NumericConstantOperator implements IOperator 
 {
@@ -41,7 +39,7 @@ public class NumericConstantOperator implements IOperator
 			String message = String.format("%s is not a numeric constant", token);
 			
 			LOGGER.severe(message);
-			throw new OperandMismatchException(message);
+			throw new FormulaEvaluatorException(message);
 		}
 	}
 }

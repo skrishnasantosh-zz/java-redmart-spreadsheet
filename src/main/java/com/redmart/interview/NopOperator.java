@@ -1,8 +1,7 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
 import java.util.Stack;
 
-import main.java.com.redmart.interview.FormulaEvaluatorException;
 import main.java.com.redmart.interview.IOperator;
 
 public class NopOperator implements IOperator 

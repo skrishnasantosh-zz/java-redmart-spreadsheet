@@ -1,15 +1,11 @@
-package main.java.com.redmart.interview.operators;
+package main.java.com.redmart.interview;
 
 import java.util.Stack;
-import java.util.logging.Logger;
 
-import main.java.com.redmart.interview.FormulaEvaluatorException;
 import main.java.com.redmart.interview.IOperator;
 
 public class CellReferenceOperator implements IOperator 
 {
-	private static final Logger LOGGER = Logger.getLogger(CellReferenceOperator.class.getName()); 
-	
 	@Override
 	public boolean opcodeMatch(String opcode) 
 	{
