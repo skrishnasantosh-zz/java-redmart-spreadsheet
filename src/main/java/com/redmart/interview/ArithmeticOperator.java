@@ -1,17 +1,14 @@
 package main.java.com.redmart.interview;
 
-import java.util.HashMap;
+
 import java.util.Stack;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleUnaryOperator;
 
 public enum ArithmeticOperator 
-{
-    INSTANCE(""),
+{    
     ADDITION("+", (a, b) -> a + b), MULTIPLICATION("*", (a, b) -> a * b), DIVISION("/", (a, b) -> a / b),
     SUBTRACTION("-", (a, b) -> a - b), INCREMENT("++", (x) -> ++x), DECREMENT("--", (x) -> --x);
-
-    private HashMap<String, ArithmeticOperator> operators;
 
     private String opcode;
     private DoubleBinaryOperator binaryOperator;
@@ -19,11 +16,8 @@ public enum ArithmeticOperator
     private int requiredOperands;
 
     private ArithmeticOperator(String opcode)
-    {
-        operators = new HashMap<String, ArithmeticOperator>();        
+    {                
         this.opcode = opcode;
-
-        operators.put(opcode, this);
     }
 
     private ArithmeticOperator(String opcode, DoubleBinaryOperator operator) 
@@ -47,9 +41,15 @@ public enum ArithmeticOperator
         return opcode;
     }
 
-    public ArithmeticOperator getByOpcode(String opcode)
+    public static ArithmeticOperator getByOpcode(String opcode)
     {
-        return operators.getOrDefault(opcode, null);
+    	for (ArithmeticOperator operator : values())
+        {
+    		if (operator.opcode.equals(opcode.trim()))
+    			return operator;
+        }
+    	
+    	return null;
     }
 
     public int getRequiredOperandCount()
@@ -69,8 +69,8 @@ public enum ArithmeticOperator
         }
         else
         {
-            double lValue = values.pop();
             double rValue = values.pop();
+            double lValue = values.pop();
 
             return binaryOperator.applyAsDouble(lValue, rValue);
         }

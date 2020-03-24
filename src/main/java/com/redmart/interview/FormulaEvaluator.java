@@ -27,7 +27,7 @@ public class FormulaEvaluator
 		{
 			if (token.length() > 0 && Character.isLetter(token.charAt(0)))
 				return true;			
-		}
+		} 
 		
 		return false;
 	}
