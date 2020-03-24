@@ -13,7 +13,9 @@ public class Spreadsheet
 	private static final Logger LOGGER = Logger.getLogger(Spreadsheet.class.getName());
 
 	public static void main(String[] args) 
-	{		
+	{	
+		LOGGER.setUseParentHandlers(false);
+		
 		BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));		
 		String source = consoleReader.lines().collect(Collectors.joining(System.getProperty("line.separator")));		
 		

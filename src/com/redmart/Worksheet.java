@@ -112,6 +112,12 @@ public class Worksheet {
 			for (int w = 0; w < this.width; w++)
 			{
 				CellNode cell = cells[h][w];
+				if (cell == null)
+				{
+					stream.println("-"); //empty cell
+					continue;
+				}
+					
 				Double value = cell.getValue();
 				
 				if (cell != null && value != null)
@@ -126,7 +132,7 @@ public class Worksheet {
 	public void setCellFormula(String cellId, String formula) throws FormulaEvaluatorException, CyclicDependencyException
 	{
         if (formula == null || formula.isEmpty())
-        	throw new IllegalArgumentException(formula);
+        	throw new FormulaEvaluatorException(String.format("Cell %s is unspecified but is referenced", cellId));
         
         CellNode cell = getCell(cellId);
 

@@ -1,17 +1,2 @@
 3 2
 A2
-
-
-6/3/2020 19:00 19:15 Problem Description 7/3/2020 15:30 16:30 Detailed Problem Analysis / Initial Project setup 17:30 19:30 Tests and Logic 19:30 21:00 Tests and Evaluator 21:30 22:30 Refinements 8/3/2020 16:00 17:30 Code walkthrough, random commits / self review 21:00 22:30 Unary Operators / Negative Numbers / Final fix wrt cyclic references (causing one test to fail) 23:30 0:30 Documentation / Final Commit (Some sample inputs) Total Hours on Logic 5.45 hours Total Hours spent on self-review  1.30 hours Total Hours on Documentations / Extras / Enhancements 1.00 hours 
-
-6/3/2020	19:00	19:15	Problem Description	
-7/3/2020	15:30	16:15	Detailed Problem Analysis / Initial Project setup	
-	        17:30	19:30	Tests, Graph Logic
-	        19:30	21:45	Tests, Evaluator and operators, 
-8/3/2020	16:00	17:30	Code walkthrough, random commits / self review	
-	        21:00	22:30	Unary Operators / Negative Numbers / Final fix wrt cyclic references (causing one test to fail)	
-	        23:30	0:30	Documentation / Final Commit (Some sample inputs)	
-				
-			Total Hours on Logic	5.45 hours
-			Total Hours spent on self-review 	1.30 hours
-			Total Hours on Documentations / Extras / Enhancements	1.00 hours
