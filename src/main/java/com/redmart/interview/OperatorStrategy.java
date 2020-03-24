@@ -18,15 +18,10 @@ public class OperatorStrategy
 		//and no DI libraries as per requirement. 
 		//So manually add the classes
 		
-		operators.add(new CellReferenceOperator());
-		operators.add(new AdditionOperator());
-		operators.add(new SubtractionOperator());
-		operators.add(new MultiplicationOperator());
-		operators.add(new DivisionOperator());
-		operators.add(new IncrementOperator());
-		operators.add(new DecrementOperator());		
+		operators.add(new CellReferenceOperator());		
 		operators.add(new NumericConstantOperator());
 		operators.add(new NopOperator());		
+		operators.add(new GenericArithmeticOperator());
 	}
 	
 	public IOperator getOperator(String token) throws FormulaEvaluatorException

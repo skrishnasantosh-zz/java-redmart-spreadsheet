@@ -45,7 +45,7 @@ public class FormulaEvaluator
 		for (String token: formula)   
 		{
 			IOperator operator = strategy.getOperator(token);
-			
+
 			if (operator == null)
 				continue;
 				

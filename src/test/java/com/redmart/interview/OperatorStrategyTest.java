@@ -35,37 +35,37 @@ public class OperatorStrategyTest
 		String className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(AdditionOperator.class.getName(), className);		
+		assertEquals(ArithmeticOperator.class.getName(), className);		
 		
 		operator = strategy.getOperator("-");
 		className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(SubtractionOperator.class.getName(), className);
+		assertEquals(ArithmeticOperator.class.getName(), className);
 		
 		operator = strategy.getOperator("*");
 		className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(MultiplicationOperator.class.getName(), className);
+		assertEquals(ArithmeticOperator.class.getName(), className);
 		
 		operator = strategy.getOperator("/");
 		className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(DivisionOperator.class.getName(), className);
+		assertEquals(ArithmeticOperator.class.getName(), className);
 		
 		operator = strategy.getOperator("++");
 		className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(IncrementOperator.class.getName(), className);
+		assertEquals(ArithmeticOperator.class.getName(), className);
 		
 		operator = strategy.getOperator("--");
 		className = operator.getClass().getName();
 		
 		assertNotNull(operator);
-		assertEquals(DecrementOperator.class.getName(), className);
+		assertEquals(ArithmeticOperator.class.getName(), className);
 		
 		operator = strategy.getOperator("");			
 		assertNull(operator);
