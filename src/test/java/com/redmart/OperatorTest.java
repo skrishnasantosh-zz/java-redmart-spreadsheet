@@ -7,7 +7,6 @@ import java.util.Stack;
 import org.junit.jupiter.api.Test;
 
 import com.redmart.exceptions.FormulaEvaluatorException;
-import com.redmart.operators.IOperator;
 import com.redmart.OperatorStrategy;
 
 public class OperatorTest 

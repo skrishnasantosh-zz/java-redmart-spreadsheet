@@ -14,11 +14,9 @@
   </properties>
   <build>
     <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
+        <plugin>            
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.1</version>
-           
+            <version>2.22.1</version>                 
         </plugin>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -31,7 +29,7 @@
         </plugin>
     </plugins>
   </build>
-  <dependencies>    
+  <dependencies>      
     <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>

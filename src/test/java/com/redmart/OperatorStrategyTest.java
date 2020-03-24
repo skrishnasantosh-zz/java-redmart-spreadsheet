@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.redmart.operators.CellReferenceOperator;
 import com.redmart.exceptions.FormulaEvaluatorException;
 import com.redmart.operators.GenericArithmeticOperator;
-import com.redmart.operators.IOperator;
 import com.redmart.operators.NumericConstantOperator;
 import com.redmart.OperatorStrategy;
 

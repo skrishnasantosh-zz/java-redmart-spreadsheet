@@ -4,7 +4,6 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 import com.redmart.exceptions.FormulaEvaluatorException;
-import com.redmart.operators.IOperator;
 
 public class FormulaEvaluator 
 {

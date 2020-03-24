@@ -2,6 +2,9 @@ package com.redmart;
 
 import java.util.Stack;
 
+import com.redmart.exceptions.FormulaEvaluatorException;
+
+
 public interface IOperator
 {
 	boolean opcodeMatch(String opcode);
