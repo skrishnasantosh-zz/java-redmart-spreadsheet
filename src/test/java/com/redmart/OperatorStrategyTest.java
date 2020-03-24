@@ -1,4 +1,4 @@
-package test.com.redmart;
+package com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import com.redmart.CellReferenceOperator;
-import com.redmart.FormulaEvaluatorException;
-import com.redmart.GenericArithmeticOperator;
-import com.redmart.IOperator;
-import com.redmart.NumericConstantOperator;
+import com.redmart.operators.CellReferenceOperator;
+import com.redmart.exceptions.FormulaEvaluatorException;
+import com.redmart.operators.GenericArithmeticOperator;
+import com.redmart.operators.IOperator;
+import com.redmart.operators.NumericConstantOperator;
 import com.redmart.OperatorStrategy;
 
 public class OperatorStrategyTest 

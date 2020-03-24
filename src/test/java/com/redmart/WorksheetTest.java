@@ -1,4 +1,4 @@
-package test.com.redmart;
+package com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.redmart.CellNode;
-import com.redmart.CyclicDependencyException;
-import com.redmart.FormulaEvaluatorException;
+import com.redmart.exceptions.CyclicDependencyException;
+import com.redmart.exceptions.FormulaEvaluatorException;
 import com.redmart.Worksheet;
 
 class WorksheetTest

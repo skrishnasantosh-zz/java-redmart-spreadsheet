@@ -1,4 +1,4 @@
-package test.com.redmart;
+package com.redmart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,8 +6,8 @@ import java.util.Stack;
 
 import org.junit.jupiter.api.Test;
 
-import com.redmart.FormulaEvaluatorException;
-import com.redmart.IOperator;
+import com.redmart.exceptions.FormulaEvaluatorException;
+import com.redmart.operators.IOperator;
 import com.redmart.OperatorStrategy;
 
 public class OperatorTest 
