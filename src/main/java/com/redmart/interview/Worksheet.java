@@ -48,7 +48,7 @@ public class Worksheet {
 		return cells[row][col];
 	}	
 		
-	public CellNode getCell(String cellId) throws InvalidCellReferenceException
+	public CellNode getCell(String cellId) throws FormulaEvaluatorException
 	{
 		CellNode node = null;
 		
@@ -73,7 +73,7 @@ public class Worksheet {
 					String message = String.format("%s - row or col is outside the bounds of worksheet", colRefStr);
 					
 					LOGGER.severe(message);					
-					throw new InvalidCellReferenceException(message);					
+					throw new FormulaEvaluatorException(message);					
 				}
 				
 				node = cells[rowIdx][colIdx];
@@ -89,15 +89,15 @@ public class Worksheet {
 				String message = String.format("invalid column reference %s", colRefStr);
 				
 				LOGGER.log(Level.SEVERE, message, e);				
-				throw new InvalidCellReferenceException(message);
+				throw new FormulaEvaluatorException(message);
 			}
 		}
 		else
 		{
-			String message = String.format("invalid cell id %s", cellId);
+			String message = String.format("invalid cell reference %s", cellId);
 						
 			LOGGER.severe(message);
-			throw new InvalidCellReferenceException(message);
+			throw new FormulaEvaluatorException(message);
 		}
 		
 		return node;
@@ -123,7 +123,7 @@ public class Worksheet {
 	}	
 	
 	
-	public void setCellFormula(String cellId, String formula) throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	public void setCellFormula(String cellId, String formula) throws FormulaEvaluatorException, CyclicDependencyException
 	{
         if (formula == null || formula.isEmpty())
         	throw new IllegalArgumentException(formula);
@@ -149,7 +149,7 @@ public class Worksheet {
         }
 	}
 	
-	private void createGraphEdges(CellNode cell, String[] formula) throws InvalidCellReferenceException, CyclicDependencyException, FormulaEvaluatorException
+	private void createGraphEdges(CellNode cell, String[] formula) throws CyclicDependencyException, FormulaEvaluatorException
 	{
 		for (String token : formula)
 		{

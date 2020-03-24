@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 import main.java.com.redmart.interview.Worksheet;
 import main.java.com.redmart.interview.CellNode;
 import main.java.com.redmart.interview.FormulaEvaluatorException;
-import main.java.com.redmart.interview.InvalidCellReferenceException;
 
 public class CellNodeTest 
 {
 	@Test
-	public void testCellNode_setCellValueAsNull_shouldSetCellValueAsNull() throws InvalidCellReferenceException, FormulaEvaluatorException
+	public void testCellNode_setCellValueAsNull_shouldSetCellValueAsNull() throws FormulaEvaluatorException
 	{
 		// arrange		
 		Worksheet sheet = new Worksheet(2, 3);

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import main.java.com.redmart.interview.CellNode;
 import main.java.com.redmart.interview.CyclicDependencyException;
 import main.java.com.redmart.interview.FormulaEvaluatorException;
-import main.java.com.redmart.interview.InvalidCellReferenceException;
 import main.java.com.redmart.interview.Worksheet;
 
 class WorksheetTest
@@ -71,28 +70,28 @@ class WorksheetTest
 	}
 		
 	@Test
-	void testGetCell_fromStringIdWithInvalidId_throwsInvalidCellReferenceException()
+	void testGetCell_fromStringIdWithInvalidId_throwsFormulaEvaluationException()
 	{		
 		// arrange	
 		Worksheet sheet = new Worksheet(2, 3);
 		
 		// act and assert
-		assertThrows(InvalidCellReferenceException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			sheet.getCell("C1");
 		});
-		assertThrows(InvalidCellReferenceException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			sheet.getCell("A5");
 		});
-		assertThrows(InvalidCellReferenceException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			sheet.getCell("AA");
 		});
-		assertThrows(InvalidCellReferenceException.class, () -> {
+		assertThrows(FormulaEvaluatorException.class, () -> {
 			sheet.getCell("12");
 		});		
 	}
 	
 	@Test
-	void testSetCellFormula_setNumericExpression_shouldCalculateTheExpressionAndStoreInResult() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	void testSetCellFormula_setNumericExpression_shouldCalculateTheExpressionAndStoreInResult() throws FormulaEvaluatorException, CyclicDependencyException
 	{		
 		// arrange		
 		Worksheet sheet = new Worksheet(2, 3);
@@ -106,7 +105,7 @@ class WorksheetTest
 	}
 	
 	@Test
-	void testSetCellFormula_setCellReference_shouldSetFormulaAsSuchAndCreateEdges() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	void testSetCellFormula_setCellReference_shouldSetFormulaAsSuchAndCreateEdges() throws FormulaEvaluatorException, CyclicDependencyException
 	{		
 		// arrange		
 		Worksheet sheet = new Worksheet(2, 3);
@@ -120,7 +119,7 @@ class WorksheetTest
 	}
 	
 	@Test
-	void testSetCellFormula_setCellReferenceWithOtherCells_shouldSetCorrectValues() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	void testSetCellFormula_setCellReferenceWithOtherCells_shouldSetCorrectValues() throws FormulaEvaluatorException, CyclicDependencyException
 	{		
 		// arrange		
 		Worksheet sheet = new Worksheet(2, 3);
@@ -150,7 +149,7 @@ class WorksheetTest
 	}
 	
 	@Test
-	void testSetCellFormula_setCellReferenceWithCycles_shouldThrowCyclicDependencyException() throws InvalidCellReferenceException, FormulaEvaluatorException, CyclicDependencyException
+	void testSetCellFormula_setCellReferenceWithCycles_shouldThrowCyclicDependencyException() throws FormulaEvaluatorException, CyclicDependencyException
 	{
 		// arrange		
 		Worksheet sheet = new Worksheet(2, 3);

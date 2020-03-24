@@ -75,16 +75,7 @@ public class Spreadsheet
 			
 			System.exit(-1);
 			
-		} 
-		catch (InvalidCellReferenceException e) 
-		{
-			String message = "invalid cell reference at - " + e.getMessage();
-			
-			LOGGER.log(Level.SEVERE, message, e);
-			System.out.println(message);
-			
-			System.exit(-2);
-		} 
+		} 	
 		catch (FormulaEvaluatorException e) 
 		{
 			String message = e.getMessage();
